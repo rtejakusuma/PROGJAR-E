@@ -6,7 +6,7 @@ import time
 SERVER_IP = "127.0.0.1"
 SERVER_PORT = 9000
 
-BUFSIZE = 1024
+BUFSIZE = 1
 
 imgpath ="./image/"
 
@@ -18,7 +18,6 @@ def getRequest():
         print "Waiting Request"
         data, addr = sock.recvfrom(1024)
         data_to_string = str(data)
-        print "Client : " + str(data)
         if data_to_string[:3] == "RDY":
             thread = Thread(target=setImage, args=(addr))
             thread.start()
@@ -28,6 +27,7 @@ def setImage(ip, port):
     addr = (ip, port)
     ImageName = ["hibiki1.jpg","hibiki2.jpg","hibiki3.jpg"]
     for x in ImageName:
+        time.sleep(2)
         sendImg(x,addr)
     sock.sendto("CLOSE".ljust(1024), addr)
 

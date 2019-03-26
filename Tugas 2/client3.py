@@ -15,7 +15,6 @@ fileName = None
 received = 0
 
 sock.sendto("RDY", (SERVER_IP, SERVER_PORT))
-print "Request Sent"
 while True:
     data, addr = sock.recvfrom(BUFSIZE)
     if data[:5] == "START":
@@ -28,11 +27,10 @@ while True:
         print fileName + " Received"
         fp.close()
     elif data[:5] == "CLOSE":
-        print "Terminating Connection"
+        print "Koneksi Diputus"
         break
     else:
         
         fp.write(data)
         received += len(data)
         print "Receiving "+ str(received) +" bytes of data"
-print "Request Finished"

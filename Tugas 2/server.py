@@ -6,7 +6,6 @@ import time
 SERVER_IP = "127.0.0.1"
 SERVER_PORT = 9000
 
-BUFSIZE = 1
 
 imgpath ="./image/"
 
@@ -38,15 +37,15 @@ def sendImg(imgname, addr):
     sizeSent = 0
     fp.close()
     sock.sendto(("START " + imgname).ljust(1024), addr)
-    iterate=(len(pckg)/BUFSIZE)
+    iterate=(len(pckg)/1)
     for i in range(iterate + 1):
         data = []
-        if (i+1)*BUFSIZE > len(pckg):
-            data = pckg[i*BUFSIZE:len(pckg)]
+        if (i+1)*1 > len(pckg):
+            data = pckg[i*1:len(pckg)]
             sizeSent += len(data)
             data.ljust(1024)
         else:
-            data = pckg[i*BUFSIZE:(i+1)*BUFSIZE]
+            data = pckg[i*1:(i+1)*1]
             sizeSent += len(data)
         sock.sendto(data, addr)
         print "Sending "+str(sizeSent) + " of " + str(len(pckg)) + " bytes"

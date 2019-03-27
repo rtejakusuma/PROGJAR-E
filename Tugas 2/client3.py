@@ -4,7 +4,6 @@ import os
 SERVER_IP = "127.0.0.1"
 SERVER_PORT = 9000
 
-BUFSIZE = 1024
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
@@ -16,7 +15,7 @@ received = 0
 
 sock.sendto("RDY", (SERVER_IP, SERVER_PORT))
 while True:
-    data, addr = sock.recvfrom(BUFSIZE)
+    data, addr = sock.recvfrom(1024)
     if data[:5] == "START":
         fileName = data[6:].replace(" ", "")
         received = 0
